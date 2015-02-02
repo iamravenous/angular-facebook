@@ -89,3 +89,16 @@ angular.module('Facebook', [])
         }
     }
 ])
+.directive("fbComments",['$timeout',
+    function($timeout){
+        return {
+            restrict: 'A',
+            link: function(scope,el,attrs){
+                $timeout(function(){
+                    FB.XFBML.parse(el[0]);
+                })
+                el.find("iframe").width(el.width());
+            }
+        }
+    }
+]);
