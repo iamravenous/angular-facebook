@@ -19,7 +19,7 @@ angular.module('Facebook', [])
                 FB.Event.subscribe('auth.authResponseChange', function(response) {
                     svc.lastResponse = response;
                     if (response.status === "connected") {
-                    	appDeferredLogout = $q.defer();
+                        appDeferredLogout = $q.defer();
                         svc.onLogin(response, appDeferredLogin);
                     } else {
                         appDeferredLogin = $q.defer();
@@ -31,10 +31,10 @@ angular.module('Facebook', [])
                     login: function() {
                         var deferred = $q.defer();
                         if (svc.lastResponse && svc.lastResponse.status === "connected") {
-                        	console.log("already logged in")
-                        	appDeferredLogin.promise.then(function(){
-                         	   deferred.resolve();
-                        	})
+                            console.log("already logged in")
+                            appDeferredLogin.promise.then(function(){
+                               deferred.resolve();
+                            })
                             return deferred.promise;
                         }
                         FB.login(function(response) {
@@ -52,11 +52,11 @@ angular.module('Facebook', [])
                     logout: function() {
                         var deferred = $q.defer()
                         FB.logout(function(response) {
-                        	appDeferredLogout.promise.then(function(){
-                        		deferred.resolve("Logged out");
-                        	},function(){
-                        		deferred.reject("Could not log out");
-                        	})
+                            appDeferredLogout.promise.then(function(){
+                                deferred.resolve("Logged out");
+                            },function(){
+                                deferred.reject("Could not log out");
+                            })
                         })
                         return deferred.promise;
                     },
@@ -93,11 +93,16 @@ angular.module('Facebook', [])
     function($timeout){
         return {
             restrict: 'A',
+            scope: {
+                href: '@fbComments',
+                numposts: '@?'
+            },
+            template: '<div class="fb-comments" data-width="100%" data-href="{{::href}}" data-numposts="{{::numposts || 5}}" data-colorscheme="light"></div>',
             link: function(scope,el,attrs){
                 $timeout(function(){
+                    console.log(scope)
                     FB.XFBML.parse(el[0]);
                 })
-                el.find("iframe").width(el.width());
             }
         }
     }
