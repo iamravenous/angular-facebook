@@ -11,6 +11,16 @@ angular.module('Facebook', [])
         }
         this.$get = ['$http', '$rootScope', '$q',
             function($http, $rootScope, $q) {
+                if(angular.equals({},config)){
+                    console.error('No configuration!')
+                    return false
+                }
+
+                if( ! FB ) {
+                    console.error('Facebook global not detected')
+                    return false
+                }
+
                 var svc;
                 var appDeferredLogin = $q.defer();
                 var appDeferredLogout = $q.defer();
