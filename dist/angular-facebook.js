@@ -12,12 +12,12 @@ angular.module('Facebook', [])
   this.$get = ['$http', '$rootScope', '$q',
   function($http, $rootScope, $q) {
     if(angular.equals({},config)){
-      console.error('No configuration!')
+      void 0
       return false
     }
 
     if( ! FB ) {
-      console.error('Facebook global not detected')
+      void 0
       return false
     }
 
@@ -41,7 +41,7 @@ angular.module('Facebook', [])
       login: function() {
         var deferred = $q.defer();
         if (svc.lastResponse && svc.lastResponse.status === "connected") {
-          console.log("already logged in")
+          void 0
           appDeferredLogin.promise.then(function(){
             deferred.resolve();
           })
@@ -79,6 +79,7 @@ angular.module('Facebook', [])
     };
     svc.ui = FB.ui;
     svc.api = FB.api;
+    svc.getLoginStatus = FB.getLoginStatus;
     return svc;
   }
 ];
@@ -110,7 +111,7 @@ function($timeout){
     template: '<div class="fb-comments" data-width="100%" data-href="{{::href}}" data-numposts="{{::numposts || 5}}" data-colorscheme="light"></div>',
     link: function(scope,el,attrs){
       $timeout(function(){
-        console.log(scope)
+        void 0
         FB.XFBML.parse(el[0]);
       })
     }

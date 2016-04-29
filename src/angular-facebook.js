@@ -79,6 +79,7 @@ angular.module('Facebook', [])
     };
     svc.ui = FB.ui;
     svc.api = FB.api;
+    svc.getLoginStatus = FB.getLoginStatus;
     return svc;
   }
 ];
