@@ -8,17 +8,24 @@ gulp.task('clean', function() {
 });
 gulp.task('copy', function() {
   return gulp.src('src/*.js')
-    .pipe(gulp.dest('dist/'))
+  .pipe(gulp.dest('dist/'))
+});
+gulp.task('strip-debug', function () {
+  return gulp.src(['dist/*.js', '!dist/*.min.js'])
+  .pipe($.stripDebug())
+  .pipe(gulp.dest(function(f) {
+    return f.base;
+  }));
 });
 gulp.task('uglify', function() {
   return gulp.src(['dist/*.js', '!dist/*.min.js'])
-    .pipe($.uglify())
-    .pipe($.rename({suffix: '.min'}))
-    .pipe(gulp.dest(function(f) {
-      return f.base;
-    }));
+  .pipe($.uglify())
+  .pipe($.rename({suffix: '.min'}))
+  .pipe(gulp.dest(function(f) {
+    return f.base;
+  }));
 });
 
 gulp.task('build', function() {
-  runSequence('clean', 'copy', 'uglify');
+  runSequence('clean', 'copy', 'strip-debug', 'uglify');
 });
