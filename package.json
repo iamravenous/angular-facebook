@@ -10,13 +10,13 @@
   ],
   "main": "dist/angular-facebook.min.js",
   "license": "MIT",
-  "homepage": "https://github.com/iamravenous/angular-facebook#readme",
+  "homepage": "https://github.com/moustacheful/angular-facebook#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iamravenous/angular-facebook.git"
+    "url": "git+https://github.com/moustacheful/angular-facebook.git"
   },
   "bugs": {
-    "url": "https://github.com/iamravenous/angular-facebook/issues"
+    "url": "https://github.com/moustacheful/angular-facebook/issues"
   },
   "keywords": [
     "angularjs",
